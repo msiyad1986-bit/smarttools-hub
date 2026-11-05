@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101828">
+<title>SmartTools Hub - Free Online Tools</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fb;color:#172033;
+font-family:Arial,sans-serif}
+header{background:#101828;color:white;padding:25px 18px}
+header h1{margin:0;font-size:27px}
+header p{color:#cbd5e1;margin-bottom:0}
+main{max-width:850px;margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:white;border:1px solid #e5e7eb;
+border-radius:13px;padding:17px;cursor:pointer}
+.card h3{margin:5px 0}
+.card p{color:#64748b;font-size:13px}
+.panel{background:white;margin-top:18px;padding:20px;
+border-radius:14px;border:1px solid #e5e7eb}
+input,textarea{width:100%;padding:12px;margin:8px 0;
+border:1px solid #cbd5e1;border-radius:8px;font-size:16px}
+button{background:#2563eb;color:white;border:0;
+padding:12px 17px;border-radius:8px;cursor:pointer;
+font-size:15px;margin:5px 3px}
+.result{font-weight:bold;color:#087443;margin-top:12px;
+overflow-wrap:anywhere}
+footer{text-align:center;padding:25px;color:#64748b}
+@media(max-width:450px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>SmartTools Hub</h1>
+<p>Tools for Everyone. Free. Fast. Simple.</p>
+</header>
+<main>
+<h2>Explore Free Tools</h2>
+<div class="grid">
+<div class="card" onclick="show('word')">
+<h3>📝 Word Counter</h3>
+<p>Count words and characters</p>
+</div>
+<div class="card" onclick="show('qr')">
+<h3>🔳 QR Generator</h3>
+<p>Create QR codes instantly</p>
+</div>
+<div class="card" onclick="show('percent')">
+<h3>📊 Percentage Calculator</h3>
+<p>Calculate percentages easily</p>
+</div>
+</div>
+
+<div class="panel" id="tool">
+<h3>Welcome to SmartTools Hub</h3>
+<p>Select a tool above to get started.</p>
+</div>
+</main>
+<footer>
+SmartTools Hub © 2026 · Free Online Tools
+</footer>
+
+<script>
+function show(type){
+let p=document.getElementById('tool');
+if(type==='word'){
+p.innerHTML=`
+<h3>Word Counter</h3>
+<textarea id="words" rows="6"
+placeholder="Type or paste your text here..."
+oninput="countWords()"></textarea>
+<div class="result" id="wordResult">
+Words: 0 | Characters: 0
+</div>`;
+}
+if(type==='qr'){
+p.innerHTML=`
+<h3>QR Code Generator</h3>
+<input id="qrText" placeholder="Enter text or website URL">
+<button onclick="makeQR()">Generate QR Code</button>
+<div id="qrResult"></div>`;
+}
+if(type==='percent'){
+p.innerHTML=`
+<h3>Percentage Calculator</h3>
+<label>Percentage (%)</label>
+<input id="rate" type="number" placeholder="Enter percentage">
+<label>Number</label>
+<input id="amount" type="number" placeholder="Enter number">
+<button onclick="calculate()">Calculate</button>
+<div class="result" id="percentResult"></div>`;
+}
+}
+function countWords(){
+let t=document.getElementById('words').value;
+let words=t.trim()?t.trim().split(/\s+/).length:0;
+document.getElementById('wordResult').textContent=
+'Words: '+words+' | Characters: '+t.length;
+}
+function calculate(){
+let r=Number(document.getElementById('rate').value);
+let a=Number(document.getElementById('amount').value);
+if(document.getElementById('rate').value==='' ||
+document.getElementById('amount').value===''){
+document.getElementById('percentResult').textContent=
+'Please enter both numbers.';
+return;
+}
+document.getElementById('percentResult').textContent=
+'Result: '+(r*a/100);
+}
+function makeQR(){
+let value=document.getElementById('qrText').value.trim();
+let out=document.getElementById('qrResult');
+if(!value){out.textContent='Please enter text or a URL.';return;}
+out.innerHTML='';
+if(typeof QRCode==='undefined'){
+out.textContent='QR library is loading. Please try again.';
+return;
+}
+let holder=document.createElement('div');
+out.appendChild(holder);
+new QRCode(holder,{text:value,width:200,height:200});
+let note=document.createElement('p');
+note.textContent='Your QR code is ready.';
+out.appendChild(note);
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</body>
+</html>
