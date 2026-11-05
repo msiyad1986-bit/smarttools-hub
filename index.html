@@ -1,136 +1,236 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101828">
 <title>SmartTools Hub - Free Online Tools</title>
+<meta name="description" content="Free online calculators, converters and useful tools.">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f4f6fb;color:#172033;
-font-family:Arial,sans-serif}
-header{background:#101828;color:white;padding:25px 18px}
-header h1{margin:0;font-size:27px}
-header p{color:#cbd5e1;margin-bottom:0}
-main{max-width:850px;margin:auto;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:white;border:1px solid #e5e7eb;
-border-radius:13px;padding:17px;cursor:pointer}
-.card h3{margin:5px 0}
-.card p{color:#64748b;font-size:13px}
-.panel{background:white;margin-top:18px;padding:20px;
-border-radius:14px;border:1px solid #e5e7eb}
-input,textarea{width:100%;padding:12px;margin:8px 0;
-border:1px solid #cbd5e1;border-radius:8px;font-size:16px}
-button{background:#2563eb;color:white;border:0;
-padding:12px 17px;border-radius:8px;cursor:pointer;
-font-size:15px;margin:5px 3px}
-.result{font-weight:bold;color:#087443;margin-top:12px;
-overflow-wrap:anywhere}
-footer{text-align:center;padding:25px;color:#64748b}
-@media(max-width:450px){.grid{grid-template-columns:1fr}}
+body{font-family:Arial,sans-serif;margin:0;background:#f3f6fb;color:#172033}
+header{background:#123b70;color:white;text-align:center;padding:25px}
+main{max-width:1000px;margin:20px auto;padding:10px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
+.card{background:white;padding:18px;border-radius:12px;box-shadow:0 2px 10px #0001}
+h2{font-size:19px;color:#16477e}
+input,textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:7px;font-size:16px}
+button{background:#1768b5;color:white;border:0;padding:11px;border-radius:7px;margin:5px 0;cursor:pointer}
+.result{font-weight:bold;margin-top:10px;overflow-wrap:anywhere}
+footer{text-align:center;padding:20px}
 </style>
 </head>
 <body>
 <header>
 <h1>SmartTools Hub</h1>
-<p>Tools for Everyone. Free. Fast. Simple.</p>
+<p>Free Online Tools for Everyone</p>
 </header>
 <main>
-<h2>Explore Free Tools</h2>
-<div class="grid">
-<div class="card" onclick="show('word')">
-<h3>📝 Word Counter</h3>
-<p>Count words and characters</p>
-</div>
-<div class="card" onclick="show('qr')">
-<h3>🔳 QR Generator</h3>
-<p>Create QR codes instantly</p>
-</div>
-<div class="card" onclick="show('percent')">
-<h3>📊 Percentage Calculator</h3>
-<p>Calculate percentages easily</p>
-</div>
+<div class="tools">
+
+<div class="card">
+<h2>1. Word Counter</h2>
+<textarea id="words" placeholder="Type your text..." oninput="countWords()"></textarea>
+<div class="result" id="wordResult">Words: 0 | Characters: 0</div>
 </div>
 
-<div class="panel" id="tool">
-<h3>Welcome to SmartTools Hub</h3>
-<p>Select a tool above to get started.</p>
+<div class="card">
+<h2>2. QR Code Generator</h2>
+<input id="qrText" placeholder="Enter text or URL">
+<button onclick="makeQR()">Generate QR Code</button>
+<div id="qrcode"></div>
+</div>
+
+<div class="card">
+<h2>3. Percentage Calculator</h2>
+<input type="number" id="pTotal" placeholder="Total number">
+<input type="number" id="pPercent" placeholder="Percentage">
+<button onclick="percentage()">Calculate</button>
+<div class="result" id="pResult"></div>
+</div>
+
+<div class="card">
+<h2>4. Age Calculator</h2>
+<input type="date" id="birthDate">
+<button onclick="ageCalc()">Calculate Age</button>
+<div class="result" id="ageResult"></div>
+</div>
+
+<div class="card">
+<h2>5. BMI Calculator</h2>
+<input type="number" id="weight" placeholder="Weight in kg">
+<input type="number" id="height" placeholder="Height in cm">
+<button onclick="bmiCalc()">Calculate BMI</button>
+<div class="result" id="bmiResult"></div>
+</div>
+
+<div class="card">
+<h2>6. Discount Calculator</h2>
+<input type="number" id="price" placeholder="Original price">
+<input type="number" id="discount" placeholder="Discount %">
+<button onclick="discountCalc()">Calculate</button>
+<div class="result" id="discountResult"></div>
+</div>
+
+<div class="card">
+<h2>7. Loan EMI Calculator</h2>
+<input type="number" id="loan" placeholder="Loan amount">
+<input type="number" id="rate" placeholder="Annual interest %">
+<input type="number" id="months" placeholder="Months">
+<button onclick="emiCalc()">Calculate EMI</button>
+<div class="result" id="emiResult"></div>
+</div>
+
+<div class="card">
+<h2>8. Unit Converter</h2>
+<input type="number" id="km" placeholder="Kilometers">
+<button onclick="unitCalc()">Convert to Miles</button>
+<div class="result" id="unitResult"></div>
+</div>
+
+<div class="card">
+<h2>9. Temperature Converter</h2>
+<input type="number" id="celsius" placeholder="Celsius">
+<button onclick="tempCalc()">Convert to Fahrenheit</button>
+<div class="result" id="tempResult"></div>
+</div>
+
+<div class="card">
+<h2>10. Password Generator</h2>
+<input type="number" id="passLength" value="12" min="4" max="64">
+<button onclick="passwordGen()">Generate Password</button>
+<div class="result" id="passResult"></div>
+</div>
+
+<div class="card">
+<h2>11. Text Case Converter</h2>
+<textarea id="caseText" placeholder="Enter text"></textarea>
+<button onclick="caseConvert('upper')">UPPERCASE</button>
+<button onclick="caseConvert('lower')">lowercase</button>
+<div class="result" id="caseResult"></div>
+</div>
+
+<div class="card">
+<h2>12. GST Calculator</h2>
+<input type="number" id="gstAmount" placeholder="Amount">
+<input type="number" id="gstRate" placeholder="GST %">
+<button onclick="gstCalc()">Calculate GST</button>
+<div class="result" id="gstResult"></div>
+</div>
+
+<div class="card">
+<h2>13. Tip Calculator</h2>
+<input type="number" id="bill" placeholder="Bill amount">
+<input type="number" id="tip" placeholder="Tip %">
+<button onclick="tipCalc()">Calculate Tip</button>
+<div class="result" id="tipResult"></div>
+</div>
+
 </div>
 </main>
-<footer>
-SmartTools Hub © 2026 · Free Online Tools
-</footer>
+<footer>© 2026 SmartTools Hub | Free Online Tools</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-function show(type){
-let p=document.getElementById('tool');
-if(type==='word'){
-p.innerHTML=`
-<h3>Word Counter</h3>
-<textarea id="words" rows="6"
-placeholder="Type or paste your text here..."
-oninput="countWords()"></textarea>
-<div class="result" id="wordResult">
-Words: 0 | Characters: 0
-</div>`;
+function val(id){
+ return Number(document.getElementById(id).value);
 }
-if(type==='qr'){
-p.innerHTML=`
-<h3>QR Code Generator</h3>
-<input id="qrText" placeholder="Enter text or website URL">
-<button onclick="makeQR()">Generate QR Code</button>
-<div id="qrResult"></div>`;
-}
-if(type==='percent'){
-p.innerHTML=`
-<h3>Percentage Calculator</h3>
-<label>Percentage (%)</label>
-<input id="rate" type="number" placeholder="Enter percentage">
-<label>Number</label>
-<input id="amount" type="number" placeholder="Enter number">
-<button onclick="calculate()">Calculate</button>
-<div class="result" id="percentResult"></div>`;
-}
-}
+
 function countWords(){
-let t=document.getElementById('words').value;
-let words=t.trim()?t.trim().split(/\s+/).length:0;
-document.getElementById('wordResult').textContent=
-'Words: '+words+' | Characters: '+t.length;
+ let t=document.getElementById('words').value.trim();
+ document.getElementById('wordResult').textContent=
+ 'Words: '+(t?t.split(/\s+/).length:0)+
+ ' | Characters: '+document.getElementById('words').value.length;
 }
-function calculate(){
-let r=Number(document.getElementById('rate').value);
-let a=Number(document.getElementById('amount').value);
-if(document.getElementById('rate').value==='' ||
-document.getElementById('amount').value===''){
-document.getElementById('percentResult').textContent=
-'Please enter both numbers.';
-return;
-}
-document.getElementById('percentResult').textContent=
-'Result: '+(r*a/100);
-}
+
 function makeQR(){
-let value=document.getElementById('qrText').value.trim();
-let out=document.getElementById('qrResult');
-if(!value){out.textContent='Please enter text or a URL.';return;}
-out.innerHTML='';
-if(typeof QRCode==='undefined'){
-out.textContent='QR library is loading. Please try again.';
-return;
+ let t=document.getElementById('qrText').value.trim();
+ let q=document.getElementById('qrcode');
+ q.innerHTML='';
+ if(!t){q.textContent='Please enter text or URL';return;}
+ if(typeof QRCode==='undefined'){q.textContent='QR library unavailable';return;}
+ new QRCode(q,t);
 }
-let holder=document.createElement('div');
-out.appendChild(holder);
-new QRCode(holder,{text:value,width:200,height:200});
-let note=document.createElement('p');
-note.textContent='Your QR code is ready.';
-out.appendChild(note);
+
+function percentage(){
+ document.getElementById('pResult').textContent=
+ (val('pTotal')*val('pPercent')/100).toFixed(2);
+}
+
+function ageCalc(){
+ let input=document.getElementById('birthDate').value;
+ let d=new Date(input);
+ if(!input||isNaN(d)||d>new Date()){
+  document.getElementById('ageResult').textContent='Enter valid birth date';
+  return;
+ }
+ let n=new Date(),a=n.getFullYear()-d.getFullYear();
+ if(n.getMonth()<d.getMonth()||
+ (n.getMonth()===d.getMonth()&&n.getDate()<d.getDate()))a--;
+ document.getElementById('ageResult').textContent='Age: '+a+' years';
+}
+
+function bmiCalc(){
+ let h=val('height')/100,w=val('weight');
+ if(h<=0||w<=0){document.getElementById('bmiResult').textContent='Enter valid values';return;}
+ let b=w/(h*h);
+ document.getElementById('bmiResult').textContent='BMI: '+b.toFixed(1);
+}
+
+function discountCalc(){
+ let p=val('price'),d=val('discount');
+ document.getElementById('discountResult').textContent=
+ 'Final price: '+(p-p*d/100).toFixed(2);
+}
+
+function emiCalc(){
+ let p=val('loan'),r=val('rate')/1200,n=val('months');
+ if(p<=0||n<=0||val('rate')<0){
+  document.getElementById('emiResult').textContent='Enter valid values';return;
+ }
+ let e=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+ document.getElementById('emiResult').textContent='Monthly EMI: '+e.toFixed(2);
+}
+
+function unitCalc(){
+ document.getElementById('unitResult').textContent=
+ (val('km')*0.621371).toFixed(3)+' miles';
+}
+
+function tempCalc(){
+ document.getElementById('tempResult').textContent=
+ ((val('celsius')*9/5)+32).toFixed(1)+' °F';
+}
+
+function passwordGen(){
+ let n=Math.max(4,Math.min(64,Math.floor(val('passLength')||12)));
+ let chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%';
+ let p='';
+ let random=new Uint32Array(n);
+ crypto.getRandomValues(random);
+ for(let i=0;i<n;i++)p+=chars[random[i]%chars.length];
+ document.getElementById('passResult').textContent=p;
+}
+
+function caseConvert(type){
+ let t=document.getElementById('caseText').value;
+ document.getElementById('caseResult').textContent=
+ type==='upper'?t.toUpperCase():t.toLowerCase();
+}
+
+function gstCalc(){
+ let a=val('gstAmount'),g=val('gstRate');
+ let tax=a*g/100;
+ document.getElementById('gstResult').textContent=
+ 'GST: '+tax.toFixed(2)+' | Total: '+(a+tax).toFixed(2);
+}
+
+function tipCalc(){
+ let b=val('bill'),t=val('tip');
+ let amount=b*t/100;
+ document.getElementById('tipResult').textContent=
+ 'Tip: '+amount.toFixed(2)+' | Total: '+(b+amount).toFixed(2);
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </body>
 </html>
-  
-
