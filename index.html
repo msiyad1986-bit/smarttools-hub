@@ -82,6 +82,11 @@ main{padding:10px}
 <h1>SmartTools Hub</h1>
 <p>Free Online Tools for Everyone</p>
 </header>
+ <div class="search-box">
+<input type="text" id="toolSearch"
+placeholder="🔍 Search your tools..."
+onkeyup="searchTools()">
+ </div>
 <main>
 <div class="tools">
 
@@ -289,6 +294,15 @@ function tipCalc(){
  document.getElementById('tipResult').textContent=
  'Tip: '+amount.toFixed(2)+' | Total: '+(b+amount).toFixed(2);
 }
+ function searchTools(){
+ let input=document.getElementById('toolSearch').value.toLowerCase();
+ let cards=document.querySelectorAll('.card');
+
+ cards.forEach(function(card){
+  let text=card.innerText.toLowerCase();
+  card.style.display=text.includes(input)?'block':'none';
+ });
+ }
 </script>
 </body>
 </html>
