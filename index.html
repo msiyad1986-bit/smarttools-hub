@@ -7,16 +7,74 @@
 <meta name="description" content="Free online calculators, converters and useful tools.">
 <style>
 *{box-sizing:border-box}
-body{font-family:Arial,sans-serif;margin:0;background:#f3f6fb;color:#172033}
-header{background:#123b70;color:white;text-align:center;padding:25px}
-main{max-width:1000px;margin:20px auto;padding:10px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
-.card{background:white;padding:18px;border-radius:12px;box-shadow:0 2px 10px #0001}
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#f0f4fa;
+color:#172033;
+}
+header{
+background:linear-gradient(135deg,#092c59,#1768b5);
+color:white;
+text-align:center;
+padding:40px 15px;
+}
+header h1{font-size:32px;margin:0 0 10px}
+header p{font-size:16px;margin:0}
+main{max-width:1100px;margin:30px auto;padding:15px}
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+.card{
+background:white;
+padding:22px;
+border-radius:14px;
+box-shadow:0 4px 15px #123b7015;
+border:1px solid #e3eaf3;
+transition:transform .2s,box-shadow .2s;
+}
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 8px 22px #123b7025;
+}
 h2{font-size:19px;color:#16477e}
-input,textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:7px;font-size:16px}
-button{background:#1768b5;color:white;border:0;padding:11px;border-radius:7px;margin:5px 0;cursor:pointer}
-.result{font-weight:bold;margin-top:10px;overflow-wrap:anywhere}
-footer{text-align:center;padding:20px}
+input,textarea{
+width:100%;
+padding:12px;
+margin:7px 0;
+border:1px solid #ccd6e3;
+border-radius:8px;
+font-size:16px;
+}
+button{
+background:#1768b5;
+color:white;
+border:0;
+padding:12px 18px;
+border-radius:8px;
+margin:6px 3px;
+cursor:pointer;
+font-weight:bold;
+}
+button:hover{background:#0d477f}
+.result{
+font-weight:bold;
+margin-top:12px;
+overflow-wrap:anywhere;
+color:#087443;
+}
+footer{
+text-align:center;
+padding:25px;
+color:#52647a;
+}
+@media(max-width:600px){
+header h1{font-size:26px}
+main{padding:10px}
+.card{padding:17px}
+}
 </style>
 </head>
 <body>
