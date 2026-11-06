@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://msiyad1986-bit.github.io/smarttools-hub/sitemap.xml
