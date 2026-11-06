@@ -244,7 +244,7 @@ function makeQR(){
 
  if(canvas){
    url=canvas.toDataURL('image/png');
- }else if(img && img.src){
+ }else if(img){
    url=img.src;
  }else{
    alert('Please generate QR Code first');
