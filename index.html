@@ -122,6 +122,7 @@ onkeyup="searchTools()">
 <input id="qrText" placeholder="Enter text or URL">
 <button onclick="makeQR()">Generate QR Code</button>
 <div id="qrcode"></div>
+<button onclick="downloadQR()">⬇️ Download QR Code</button>
 </div>
 
 <div class="card">
@@ -235,6 +236,17 @@ function makeQR(){
  if(typeof QRCode==='undefined'){q.textContent='QR library unavailable';return;}
  new QRCode(q,t);
 }
+ function downloadQR(){
+ let q=document.querySelector('#qrcode img');
+ if(!q){
+   alert('Please generate QR Code first');
+   return;
+ }
+ let a=document.createElement('a');
+ a.href=q.src;
+ a.download='SmartTools-Hub-QR.png';
+ a.click();
+ }
 
 function percentage(){
  document.getElementById('pResult').textContent=
