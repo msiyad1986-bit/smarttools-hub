@@ -237,16 +237,27 @@ function makeQR(){
  new QRCode(q,t);
 }
  function downloadQR(){
- let q=document.querySelector('#qrcode img');
- if(!q){
+ let q=document.getElementById('qrcode');
+ let canvas=q.querySelector('canvas');
+ let img=q.querySelector('img');
+ let url='';
+
+ if(canvas){
+   url=canvas.toDataURL('image/png');
+ }else if(img && img.src){
+   url=img.src;
+ }else{
    alert('Please generate QR Code first');
    return;
  }
+
  let a=document.createElement('a');
- a.href=q.src;
+ a.href=url;
  a.download='SmartTools-Hub-QR.png';
+ document.body.appendChild(a);
  a.click();
- }
+ a.remove();
+}
 
 function percentage(){
  document.getElementById('pResult').textContent=
